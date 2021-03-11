@@ -36,4 +36,9 @@ const loginValidation = (data) => {
   return Joi.validate(data, schema);
 };
 
+// search validation
+const searchValidation = (data) => {
+  const schema = {};
+};
+
 module.exports = { registerValidation, loginValidation };

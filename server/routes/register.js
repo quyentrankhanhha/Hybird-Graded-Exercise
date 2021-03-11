@@ -4,10 +4,6 @@ const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const { registerValidation } = require("../schema");
 
-router.get("/", (req, res) => {
-  res.send("hello");
-});
-
 router.post("/", async (req, res) => {
   // validate the data
   const { error } = registerValidation(req.body);
@@ -30,7 +26,8 @@ router.post("/", async (req, res) => {
   try {
     const savedUser = await user.save();
     // return user: id
-    res.send({ user: user._id });
+    // res.send({ user: user._id });
+    res.json({ message: "Create user successfully!" });
   } catch (err) {
     res.status(400).send(err);
   }
