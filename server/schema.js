@@ -10,16 +10,13 @@ const registerValidation = (data) => {
       .required(),
     // must have two domain parts and TLD must be .com or .net
     email: Joi.string()
-      .email({
-        minDomainSegments: 2,
-        tlds: { allow: ["com", "net"] }
-      })
+      .min(6)
+      .email()
       .required(),
     password: Joi.string()
       .pattern(new RegExp("^[a-zA-Z0-9]{3,30}$"))
       .min(3)
-      .min(6)
-      .max(25)
+      .max(30)
       .required()
   });
   return schema.validate(data);
@@ -27,18 +24,13 @@ const registerValidation = (data) => {
 
 // login validation
 const loginValidation = (data) => {
-  const schema = {
-    username: Joi.string().min(6).required,
+  const schema = Joi.object({
+    email: Joi.string().required(),
     password: Joi.string()
       .min(6)
       .required()
-  };
-  return Joi.validate(data, schema);
-};
-
-// search validation
-const searchValidation = (data) => {
-  const schema = {};
+  });
+  return schema.validate(data);
 };
 
 module.exports = { registerValidation, loginValidation };

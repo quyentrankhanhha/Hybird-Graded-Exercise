@@ -1,4 +1,7 @@
+const express = require("express");
+const router = express.Router();
 const jwt = require("jsonwebtoken");
+const passport = require("passport");
 
 // authentication middle
 module.exports = function(req, res, next) {

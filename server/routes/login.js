@@ -8,7 +8,7 @@ const { loginValidation } = require("../schema");
 router.post("/", async (req, res) => {
   // validate the data
   const { error } = loginValidation(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error) return res.status(400).send(error);
 
   // check the email exists
   const user = await User.findOne({
@@ -22,8 +22,8 @@ router.post("/", async (req, res) => {
 
   // create and assgin a token
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-  res.header("auth-token", token);
-  res.send("Logged in!");
+  res.setHeader("auth-token", token);
+  res.status(200).send("Logged in!");
 });
 
 module.exports = router;
