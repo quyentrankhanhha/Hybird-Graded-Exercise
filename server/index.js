@@ -35,6 +35,12 @@ app.use("/login", loginRouter);
 app.use("/register", registerRouter);
 app.use("/items", itemsRouter);
 
+const User = require("./models/User");
+app.get("/user", async function(req, res) {
+  const user = await User.find();
+  res.json(user);
+});
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
