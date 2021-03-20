@@ -56,7 +56,7 @@ router.get("/:itemId", async (req, res) => {
 
 // update a specific item post
 router.patch(
-  "/user/:userId/:itemId",
+  "/:itemId/user/:userId",
   upload.single("imagine"),
   protected,
   async (req, res) => {
@@ -90,7 +90,7 @@ router.patch(
 );
 
 // delete a specific item post
-router.delete("/user/:userId/:itemId", protected, async (req, res) => {
+router.delete("/:itemId/user/:userId", protected, async (req, res) => {
   try {
     // find item by id
     const item = await Item.findById(req.params.itemId);
@@ -109,7 +109,7 @@ router.delete("/user/:userId/:itemId", protected, async (req, res) => {
 });
 
 // search by location
-router.get("/search/:query", async (req, res) => {
+router.get("/search/:search", async (req, res) => {
   try {
     const items = await Item.fuzzySearch(req.params.query);
     console.log(items);
