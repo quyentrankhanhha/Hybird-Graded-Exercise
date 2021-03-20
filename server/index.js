@@ -4,7 +4,7 @@ const cors = require("cors");
 const moongose = require("mongoose");
 const dotenv = require("dotenv");
 const app = express();
-const port = 4000;
+const port = process.env.PORT || 4000;
 
 // import routes
 const loginRouter = require("./routes/login");
@@ -29,6 +29,10 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
+
+app.get("/", (req, res) => {
+  res.send("Hello");
+});
 
 // routers
 app.use("/login", loginRouter);
