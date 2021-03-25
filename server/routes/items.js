@@ -108,14 +108,14 @@ router.delete("/:itemId/user/:userId", protected, async (req, res) => {
   }
 });
 
-// search by location
-router.get("/search/:search", async (req, res) => {
-  try {
-    const items = await Item.fuzzySearch(req.params.query);
-    console.log(items);
-  } catch (err) {
-    console.error(err);
-  }
-});
+// search
+// router.get("/search/:search", async (req, res) => {
+//   try {
+//     const items = await Item.fuzzySearch(req.params.query);
+//     console.log(items);
+//   } catch (err) {
+//     console.error(err);
+//   }
+// });
 
 module.exports = router;

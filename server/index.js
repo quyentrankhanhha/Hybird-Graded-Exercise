@@ -5,6 +5,7 @@ const moongose = require("mongoose");
 const dotenv = require("dotenv");
 const app = express();
 const port = process.env.PORT || 4000;
+const fuzzy = require("mongoose-fuzzy-searching");
 
 // import routes
 const loginRouter = require("./routes/login");

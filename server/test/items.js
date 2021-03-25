@@ -1,6 +1,6 @@
 const chai = require("chai");
 const chaihttp = require("chai-http");
-const apiAddress = "http://localhost:4000";
+const apiAddress = "http://localhost:4000/";
 const itemId = "604c3507e0afe238410b15fd";
 const authToken =
   "$2b$10$29bJsAzVehvbuHZ4iKTBCuHoy5O2HFE/iX.COXuyfzitAl7MPvcM6";
