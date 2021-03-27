@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import axios from "axios";
 
-export default function Home(props) {
+export default function Home() {
   const [data, setData] = useState([]);
   const getData = async () => {
     try {
