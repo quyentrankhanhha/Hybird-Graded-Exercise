@@ -6,28 +6,60 @@ import {
   View,
   TouchableOpacity
 } from "react-native";
+import axios from "axios";
 
 class Register extends Component {
+  state = {
+    newEmail: "",
+    newPassword: "",
+    newUsername: ""
+  };
+  _register = async () => {
+    axios("https://graded-exercises.herokuapp.com/register", {
+      method: "POST",
+      data: {
+        username: this.state.newUsername,
+        email: this.state.newEmail,
+        password: this.state.newPassword
+      }
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          alert("Register successful!");
+          setTimeout(this.props.navigation.navigate("Login"), 3000);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   render() {
     return (
       <View style={styles.container}>
-        <TextInput style={styles.input} placeholder="Name"></TextInput>
-        <TextInput style={styles.input} placeholder="Email"></TextInput>
+        <TextInput
+          style={styles.input}
+          placeholder="Username"
+          onChangeText={(newUsername) => this.setState({ newUsername })}
+          value={this.state.newUsername}
+          autoCapitalize="none"
+        ></TextInput>
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          onChangeText={(newEmail) => this.setState({ newEmail })}
+          value={this.state.newEmail}
+          autoCapitalize="none"
+        ></TextInput>
         <TextInput
           style={styles.input}
           placeholder="Password"
           secureTextEntry
-          onPress={() => alert("Login Works")}
+          onChangeText={(newPassword) => this.setState({ newPassword })}
+          value={this.state.newPassword}
         ></TextInput>
         <View style={styles.btnContainer}>
-          <TouchableOpacity style={styles.userBtn}>
+          <TouchableOpacity style={styles.userBtn} onPress={this._register}>
             <Text style={styles.btnTxt}>Register</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={{ height: 6 }}></View>
-        <View style={styles.btnContainer}>
-          <TouchableOpacity style={styles.userBtn}>
-            <Text style={styles.btnTxt}>Login</Text>
           </TouchableOpacity>
         </View>
       </View>

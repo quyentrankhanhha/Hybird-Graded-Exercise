@@ -26,7 +26,6 @@ export default function Search() {
       });
       const results = fuse.search(search);
       setResult(results);
-      console.log(results);
     } catch (err) {
       console.log(err);
     }
@@ -47,7 +46,7 @@ export default function Search() {
         value={search}
       />
       <FlatList
-        keyExtractor={(item) => item._id}
+        keyExtractor={(item) => item.item._id}
         data={result}
         renderItem={({ item }) => (
           <View style={styles.item}>

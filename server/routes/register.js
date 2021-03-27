@@ -25,10 +25,11 @@ router.post("/", async (req, res) => {
   });
   try {
     const savedUser = await user.save();
-    // return user: id
-    // res.send({ user: user._id });
     res.send(savedUser);
-    res.status(201).json("Create user successfully!");
+    res.json({
+      status: 201,
+      message: "Create user successfully!"
+    });
   } catch (err) {
     res.status(400).send(err);
   }

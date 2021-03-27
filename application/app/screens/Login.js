@@ -6,17 +6,16 @@ import {
   View,
   TouchableOpacity
 } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
 class Login extends Component {
   state = {
     email: "",
     password: "",
-    dataUser: [],
     isAuthenticated: false,
     token: ""
   };
+
   _login = async () => {
     axios("https://graded-exercises.herokuapp.com/login", {
       method: "POST",
@@ -25,12 +24,13 @@ class Login extends Component {
         password: this.state.password
       }
     })
-      .then((res) => {
-        console.log(res);
-        this.setState({ token: res.data.token });
+      .then(async (res) => {
         if (res.data.message === "Logged in !") {
+          this.setState({ token: res.data.token });
           this.setState({ isAuthenticated: true });
-          this.props.navigation.navigate("Home");
+          this.setState({ loggedIn: true });
+          alert("Login successful!");
+          setTimeout(this.props.navigation.navigate("Home"), 3000);
         }
       })
       .catch((err) => {

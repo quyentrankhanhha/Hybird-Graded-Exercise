@@ -1,12 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Profile() {
-  _logout = async () => {
-    await AsyncStorage.clear();
-    this.props.navigation.navigate("Home");
-  };
   return (
     <View style={styles.container}>
       <Text>Profile</Text>
